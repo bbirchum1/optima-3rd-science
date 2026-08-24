@@ -608,7 +608,7 @@ details.go-deeper summary::before { content: '🔭 '; }
   border: none; cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-  z-index: 9000; font-family: inherit;
+  z-index: 500; font-family: inherit;
 }
 .back-to-top.show { opacity: 1; visibility: visible; }
 .back-to-top:hover { transform: translateY(-2px); }
@@ -676,31 +676,6 @@ em { color: #5A4D3E; }
   text-align: left;
   font-style: italic;
 }
-
-/* ── Response Textareas ── */
-.response-textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #FAFAF6; font-family: 'Nunito', sans-serif; font-size: 15px; color: #2B1D12; resize: vertical; line-height: 1.65; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; margin-bottom: 12px; }
-.response-textarea:focus { outline: none; border-color: #55C8E8; box-shadow: 0 0 0 3px rgba(85,200,232,0.15); background: #fff; }
-.response-textarea.ta-sm { min-height: 64px; }
-.response-textarea.ta-lg { min-height: 110px; }
-/* ── Gathered Answers ── */
-.gathered-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin: 24px 0; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.06); }
-.gathered-header { background: linear-gradient(135deg, #0E1C42, #1A2D5A); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
-.gathered-header-icon { font-size: 24px; }
-.gathered-header-label { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
-.gathered-header-title { font-size: 18px; color: #fff; font-weight: 800; line-height: 1.2; }
-.gathered-body { padding: 16px 20px 18px; }
-.gathered-intro { font-size: 14px; color: #5A4D3E; line-height: 1.6; margin-bottom: 12px; font-style: italic; }
-.gathered-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1.5px solid #E8DDD2; }
-.gathered-name-label { font-size: 13px; color: #0E1C42; font-weight: 800; white-space: nowrap; }
-.gathered-name-input { flex: 1; padding: 8px 12px; border: 1.5px solid #D0C8BE; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 14px; color: #2B1D12; background: #FAFAF6; }
-.gathered-name-input:focus { outline: none; border-color: #55C8E8; background: #fff; }
-.gathered-output { width: 100%; min-height: 200px; padding: 12px 14px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #F4F0EB; font-family: 'Courier New', monospace; font-size: 13px; color: #2B1D12; resize: vertical; line-height: 1.6; white-space: pre-wrap; box-sizing: border-box; }
-.gathered-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.gathered-btn { background: #0E1C42; color: #fff; border: none; padding: 9px 18px; border-radius: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
-.gathered-btn:hover { background: #55C8E8; transform: translateY(-1px); }
-.gathered-btn-download { background: #34B76F; }
-.gathered-copied { display: none; margin-top: 8px; padding: 6px 12px; background: #EEF8F0; color: #1a6b35; border-radius: 8px; font-size: 13px; font-weight: 700; border: 1.5px solid #B8E8CF; }
-.gathered-copied.show { display: block; }
 </style>
 </head>
 
@@ -1327,6 +1302,9 @@ em { color: #5A4D3E; }
 <!-- ══════════════════════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-lesson">
 
+  <p class="tab-orientation">Now learn the main science idea.</p>
+
+
   <!-- Uploaded lesson image -->
   <div class="lesson-figure">
     <div class="lesson-figure-label">📷 Photo · In the Classroom</div>
@@ -1735,11 +1713,8 @@ em { color: #5A4D3E; }
       <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Think about each question. You'll use your best ideas in the Write and Explain section below.</p>
 
       <div class="pq"><span class="pq-num" style="background:#F9A825;">4</span><span class="pq-text">What is the difference between weather and climate? Use a real example to explain your answer — it can be a national park or a place you know.</span></div>
-      <textarea class="response-textarea" id="ans-1" data-label="Part B Q4 — Weather vs. climate" placeholder="Type your answer here..." oninput="refreshGathered()"></textarea>
       <div class="pq"><span class="pq-num" style="background:#F9A825;">5</span><span class="pq-text">How does sunlight cause different climate zones to form? Explain what would happen to climate if a place suddenly received much more sunlight.</span></div>
-      <textarea class="response-textarea" id="ans-2" data-label="Part B Q5 — Sunlight and climate zones" placeholder="Type your answer here..." oninput="refreshGathered()"></textarea>
       <div class="pq"><span class="pq-num" style="background:#F9A825;">6</span><span class="pq-text">How is a wetland different from a desert? Compare their temperatures, precipitation, and the types of living things you'd find there.</span></div>
-      <textarea class="response-textarea ta-lg" id="ans-3" data-label="Part B Q6 — Wetland vs. desert" placeholder="Type your answer here..." oninput="refreshGathered()"></textarea>
 
       <!-- WRITE AND EXPLAIN -->
       <div class="key-concept scroll-reveal" style="background:#FFF9E8;border-color:#F0E4C0;margin-top:20px;">
@@ -1750,7 +1725,8 @@ em { color: #5A4D3E; }
           <p style="font-size:15px;color:#2D6A4F;font-weight:700;margin-bottom:6px;">What do you notice?</p>
           <div style="background:#fff;border:2px solid #E8DDD2;border-radius:10px;padding:14px;">
             <p style="font-size:14px;color:#9A8E82;font-style:italic;margin:0 0 10px;">💡 Start with: <em>"When I compare the ___ zone and the ___ zone, I notice that…"</em></p>
-            <textarea class="response-textarea" id="cer-1" data-label="Write & Explain — What do you notice?" placeholder="When I compare the ___ zone and the ___ zone, I notice that…" oninput="refreshGathered()"></textarea>
+            <div style="border-bottom:1.5px solid #E8DDD2;height:36px;"></div>
+            <div style="border-bottom:1.5px solid #E8DDD2;height:36px;margin-top:10px;"></div>
           </div>
         </div>
 
@@ -1758,7 +1734,8 @@ em { color: #5A4D3E; }
           <p style="font-size:15px;color:#2D6A4F;font-weight:700;margin-bottom:6px;">What does your chart tell you?</p>
           <div style="background:#fff;border:2px solid #E8DDD2;border-radius:10px;padding:14px;">
             <p style="font-size:14px;color:#9A8E82;font-style:italic;margin:0 0 10px;">💡 Start with: <em>"My chart shows me that the main reason these places are different is…"</em></p>
-            <textarea class="response-textarea" id="cer-2" data-label="Write & Explain — What does your chart tell you?" placeholder="My chart shows me that the main reason these places are different is…" oninput="refreshGathered()"></textarea>
+            <div style="border-bottom:1.5px solid #E8DDD2;height:36px;"></div>
+            <div style="border-bottom:1.5px solid #E8DDD2;height:36px;margin-top:10px;"></div>
           </div>
         </div>
 
@@ -1766,7 +1743,8 @@ em { color: #5A4D3E; }
           <p style="font-size:15px;color:#2D6A4F;font-weight:700;margin-bottom:6px;">Why does that make sense?</p>
           <div style="background:#fff;border:2px solid #E8DDD2;border-radius:10px;padding:14px;">
             <p style="font-size:14px;color:#9A8E82;font-style:italic;margin:0 0 10px;">💡 Start with: <em>"This makes sense because what I learned about sunlight and precipitation shows…"</em></p>
-            <textarea class="response-textarea ta-lg" id="cer-3" data-label="Write & Explain — Why does that make sense?" placeholder="This makes sense because what I learned about sunlight and precipitation shows…" oninput="refreshGathered()"></textarea>
+            <div style="border-bottom:1.5px solid #E8DDD2;height:36px;"></div>
+            <div style="border-bottom:1.5px solid #E8DDD2;height:36px;margin-top:10px;"></div>
           </div>
         </div>
 
@@ -1778,31 +1756,6 @@ em { color: #5A4D3E; }
       <!-- PART C -->
       <p style="font-size:18px;color:#1B4332;font-weight:800;margin-bottom:6px;margin-top:20px;">🎨 Part C — Draw &amp; Label</p>
       <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">In your science notebook, draw two climate zones side by side — one that gets very little precipitation and one that gets a lot. Label at least three features in each drawing: typical temperature, one plant, and one animal that lives there.</p>
-
-
-      <!-- ═══ GATHERED ANSWERS ═══ -->
-      <div class="gathered-card">
-        <div class="gathered-header">
-          <div class="gathered-header-icon">📋</div>
-          <div>
-            <div class="gathered-header-label">Lesson 3.01 · Submission Packet</div>
-            <div class="gathered-header-title">Gathered Answers</div>
-          </div>
-        </div>
-        <div class="gathered-body">
-          <div class="gathered-intro">All of your written responses — gathered in one place so you can copy or download them for Canvas turn-in.</div>
-          <div class="gathered-name-row">
-            <span class="gathered-name-label">Your name:</span>
-            <input type="text" class="gathered-name-input" id="student-name" placeholder="Type your name here" oninput="refreshGathered()" />
-          </div>
-          <textarea class="gathered-output" id="gatheredOutput" readonly></textarea>
-          <div class="gathered-actions">
-            <button class="gathered-btn" onclick="copyGathered()">📋 Copy to Clipboard</button>
-            <button class="gathered-btn gathered-btn-download" onclick="downloadGathered()">⬇ Download as Text</button>
-          </div>
-          <div class="gathered-copied" id="copiedMsg">Copied! Paste into your Canvas text box to turn in.</div>
-        </div>
-      </div>
 
       <!-- WHAT TO TURN IN -->
       <div style="background:#fff;border:2px solid #0288D1;border-radius:18px;margin-top:20px;overflow:hidden;">
@@ -2009,10 +1962,7 @@ document.querySelectorAll('.vtip').forEach(function(tip) {
     if (left < 8) left = 8;
     if (left + bw > window.innerWidth - 8) left = window.innerWidth - bw - 8;
     box.style.left = left + 'px';
-    box.style.visibility = 'hidden'; box.style.opacity = '0'; box.style.display = 'block';
-    var bh = box.offsetHeight || 80;
-    box.style.display = ''; box.style.visibility = ''; box.style.opacity = '';
-    var topPos = rect.top - bh - 14;
+    var topPos = rect.top - 140;
     if (topPos < 8) topPos = rect.bottom + 10;
     box.style.top = topPos + 'px';
   });
@@ -2052,55 +2002,64 @@ document.querySelectorAll('.vtip').forEach(function(tip) {
   }
 })();
 
-// ── Confetti (template-standard) ──
+// ── Confetti ──
 (function() {
   var canvas = document.getElementById('confettiCanvas');
   var ctx    = canvas.getContext('2d');
   var particles = [], animating = false;
   var colors = ['#0288D1','#55C8E8','#FDD835','#52B788','#2E7D32','#7B5EA7','#FF8F00','#4DD0E1'];
+  var scienceEmojis = ['🔍','🧪','🔬','🔭','🌱','🚀'];
   function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   window.addEventListener('resize', resize); resize();
   function Particle(x, y) {
-    this.x = x; this.y = y;
-    this.vx = (Math.random() - 0.5) * 14;
-    this.vy = Math.random() * -16 - 4;
-    this.gravity = 0.42; this.drag = 0.98;
-    this.rotation = Math.random() * 360;
-    this.rotSpeed = (Math.random() - 0.5) * 10;
-    this.opacity = 1;
-    this.size = Math.random() * 8 + 4;
-    this.color = colors[Math.floor(Math.random() * colors.length)];
-    this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
+    this.isEmoji = Math.random() < 0.15;
+    this.x=x; this.y=y; this.vx=(Math.random()-.5)*16; this.vy=Math.random()*-18-4;
+    this.gravity= this.isEmoji ? 0.38 : 0.42;
+    this.drag=.98; this.opacity=1;
+    if (this.isEmoji) {
+      this.emoji = scienceEmojis[Math.floor(Math.random()*scienceEmojis.length)];
+      this.size = Math.random()*8+22;
+    } else {
+      this.size=Math.random()*8+4;
+      this.color=colors[Math.floor(Math.random()*colors.length)];
+      this.rotation=Math.random()*360; this.rotSpeed=(Math.random()-.5)*12;
+      this.shape=Math.random()>.5?'rect':'circle';
+    }
   }
-  function burst(x, y, count) {
-    for (var i = 0; i < count; i++) particles.push(new Particle(x, y));
-    if (!animating) { animating = true; animate(); }
+  function burst(x,y,count){
+    for(var i=0;i<count;i++) particles.push(new Particle(x,y));
+    if(!animating){ animating=true; animate(); }
   }
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = particles.length - 1; i >= 0; i--) {
-      var p = particles[i];
-      p.vy += p.gravity; p.vx *= p.drag;
-      p.x += p.vx; p.y += p.vy;
-      p.rotation += p.rotSpeed;
-      p.opacity -= 0.008;
-      if (p.opacity <= 0) { particles.splice(i, 1); continue; }
-      ctx.save(); ctx.globalAlpha = p.opacity;
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rotation * Math.PI / 180);
-      ctx.fillStyle = p.color;
-      if (p.shape === 'rect') { ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6); }
-      else { ctx.beginPath(); ctx.arc(0, 0, p.size/2, 0, Math.PI*2); ctx.fill(); }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(var i=particles.length-1;i>=0;i--){
+      var p=particles[i];
+      p.vy+=p.gravity; p.vx*=p.drag; p.x+=p.vx; p.y+=p.vy;
+      p.opacity-=0.013;
+      if(p.opacity<=0){ particles.splice(i,1); continue; }
+      ctx.save(); ctx.globalAlpha=p.opacity;
+      if(p.isEmoji){
+        ctx.font=p.size+'px serif';
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText(p.emoji,p.x,p.y);
+      } else {
+        ctx.translate(p.x,p.y);
+        p.rotation+=p.rotSpeed;
+        ctx.rotate(p.rotation*Math.PI/180);
+        ctx.fillStyle=p.color;
+        if(p.shape==='rect'){ ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6); }
+        else{ ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill(); }
+      }
       ctx.restore();
     }
-    if (particles.length > 0) { requestAnimationFrame(animate); }
-    else { animating = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    if(particles.length>0){ requestAnimationFrame(animate); }
+    else{ animating=false; ctx.clearRect(0,0,canvas.width,canvas.height); }
   }
-  window.launchConfetti = function() {
-    var cx = window.innerWidth / 2;
-    burst(cx - 100, window.innerHeight * 0.45, 50);
-    burst(cx,       window.innerHeight * 0.35, 60);
-    burst(cx + 100, window.innerHeight * 0.45, 50);
+  window.launchConfetti = function(){
+    var cx = window.innerWidth/2;
+    burst(cx-100, window.innerHeight*.45, 40);
+    burst(cx,     window.innerHeight*.35, 50);
+    burst(cx+100, window.innerHeight*.45, 40);
   };
 })();
 
@@ -2126,109 +2085,6 @@ document.getElementById('progressFill').style.width = '20%';
 document.getElementById('progressPct').textContent = '20%';
 document.querySelectorAll('.tab-progress-inline-fill').forEach(function(el){ el.style.width = '20%'; });
 document.querySelectorAll('.tab-progress-inline-pct').forEach(function(el){ el.textContent = '20%'; });
-
-// ── Gathered Answers ──
-function refreshGathered() {
-  var out = document.getElementById('gatheredOutput'); if (!out) return;
-  var lines = [];
-  var nameEl = document.getElementById('student-name'); var name = nameEl ? nameEl.value.trim() : '';
-  lines.push('═══════════════════════════════════════════════');
-  lines.push('  OPTIMA ACADEMY ONLINE — 3RD GRADE SCIENCE');
-  lines.push('  Lesson 3.01 · Why Are National Parks Different?');
-  lines.push('  Student: ' + (name || '(add your name above)'));
-  lines.push('═══════════════════════════════════════════════');
-  lines.push('');
-  var textareas = document.querySelectorAll('.response-textarea[data-label]');
-  textareas.forEach(function(ta) {
-    lines.push('--- ' + ta.getAttribute('data-label').toUpperCase() + ' ---');
-    lines.push(ta.value.trim() || '(not yet answered)');
-    lines.push('');
-  });
-  out.value = lines.join('\n');
-}
-function copyGathered() {
-  refreshGathered();
-  var out = document.getElementById('gatheredOutput'); out.select();
-  try { document.execCommand('copy'); } catch(e) {}
-  var msg = document.getElementById('copiedMsg');
-  if (msg) { msg.classList.add('show'); setTimeout(function(){ msg.classList.remove('show'); }, 2400); }
-}
-function downloadGathered() {
-  refreshGathered();
-  var text = document.getElementById('gatheredOutput').value;
-  var blob = new Blob([text], {type: 'text/plain'});
-  var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = 'lesson-3-01-why-national-parks-different.txt';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-}
-document.addEventListener('input', function(e) {
-  if (e.target.classList.contains('response-textarea') || e.target.id === 'student-name') {
-    var panel = document.getElementById('tab-assignment');
-    if (panel && panel.classList.contains('active')) refreshGathered();
-  }
-});
-(function(){
-  var origSwitch = window.switchTab;
-  if (origSwitch) {
-    window.switchTab = function(id) { origSwitch(id); if (id === 'assignment') setTimeout(refreshGathered, 50); };
-  }
-})();
-
-// ── Auto-Save (persistence) ──
-var _lessonKey = (document.title || 'science-lesson').replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase();
-(function(){
-  document.querySelectorAll('textarea.response-textarea').forEach(function(t){
-    if(!t.id) return;
-    try{ var v = localStorage.getItem(_lessonKey+'-'+t.id); if(v){ t.value = v; } }catch(e){}
-    t.addEventListener('input', function(){ try{ localStorage.setItem(_lessonKey+'-'+this.id, this.value); }catch(e){} });
-  });
-  var nameEl = document.getElementById('student-name');
-  if(nameEl){
-    try{ var v = localStorage.getItem(_lessonKey+'-student-name'); if(v){ nameEl.value = v; } }catch(e){}
-    nameEl.addEventListener('input', function(){ try{ localStorage.setItem(_lessonKey+'-student-name', this.value); }catch(e){} });
-  }
-  setTimeout(refreshGathered, 100);
-})();
-
-// ── Warn before leaving ──
-window.addEventListener('beforeunload', function(e){
-  var hasWork = false;
-  document.querySelectorAll('textarea.response-textarea').forEach(function(t){
-    if(t.value && t.value.trim().length > 0){ hasWork = true; }
-  });
-  if(hasWork){ e.preventDefault(); e.returnValue = ''; }
-});
-
-// ── Sticky Nav Fallback for Canvas iframes ──
-(function() {
-  var inIframe = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
-  if (!inIframe) return;
-  var progress = document.querySelector('.progress-wrap');
-  var tabBar = document.getElementById('tabBar');
-  if (!progress || !tabBar) return;
-  // Test if sticky works
-  var cs = window.getComputedStyle(progress);
-  if (cs.position === 'sticky' || cs.position === '-webkit-sticky') {
-    // Sticky might still fail in some iframe contexts — use IntersectionObserver as backup
-    if (!('IntersectionObserver' in window)) return;
-    var sentinel = document.createElement('div');
-    sentinel.style.cssText = 'height:1px;width:100%;visibility:hidden;pointer-events:none;';
-    progress.parentNode.insertBefore(sentinel, progress);
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (!entry.isIntersecting) {
-          progress.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:200;max-width:920px;margin:0 auto;background:linear-gradient(135deg,#0E1C42,#1A2D5A);padding:10px 24px;display:flex;align-items:center;gap:14px;';
-          tabBar.style.cssText = 'position:fixed;top:' + progress.offsetHeight + 'px;left:0;right:0;z-index:100;max-width:920px;margin:0 auto;display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid #E8DDD2;';
-        } else {
-          progress.style.cssText = '';
-          tabBar.style.cssText = '';
-        }
-      });
-    }, { rootMargin: '-1px 0px 0px 0px', threshold: [0] });
-    obs.observe(sentinel);
-  }
-})();
-
 </script>
 
 <!-- Video Manifest Loader -->

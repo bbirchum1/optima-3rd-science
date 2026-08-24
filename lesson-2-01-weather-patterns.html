@@ -283,8 +283,9 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
 .footer-line3 { font-size:11px; color:rgba(255,255,255,0.4); }
 
 /* ── Back to Top ── */
-#backToTop { position:fixed; bottom:2rem; right:2rem; display:none; align-items:center; gap:0.5rem; padding:0.6rem 1.2rem; border-radius:999px; background:#0288D1; color:#fff; font-weight:600; border:none; cursor:pointer; font-family:inherit; font-size:14px; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:opacity 0.3s,transform 0.3s; }
-#backToTop:hover { transform:translateY(-2px); }
+.back-to-top { position:fixed; bottom:28px; right:28px; display:flex; align-items:center; gap:8px; padding:12px 22px; border-radius:40px; background:linear-gradient(135deg,#2D6A4F,#1B4332); color:#fff; font-family:inherit; font-size:15px; font-weight:700; border:none; cursor:pointer; box-shadow:0 4px 16px rgba(45,106,79,0.35); opacity:0; visibility:hidden; transform:translateY(16px); transition:opacity 0.35s,visibility 0.35s,transform 0.35s,box-shadow 0.2s; z-index:9000; }
+.back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
+.back-to-top:hover { box-shadow:0 6px 20px rgba(45,106,79,0.5); transform:translateY(-3px); }
 #confettiCanvas { position:fixed; inset:0; pointer-events:none; z-index:999; }
 
 @media(max-width:600px){
@@ -320,12 +321,39 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
   background: rgba(0,0,0,0.05); border-radius: 6px;
   padding: 4px 10px; display: inline-block; margin-top: 6px;
 }
+
+/* ── Response Textareas ── */
+.response-textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #FAFAF6; font-family: 'Nunito', sans-serif; font-size: 15px; color: #2B1D12; resize: vertical; line-height: 1.65; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; margin-bottom: 12px; }
+.response-textarea:focus { outline: none; border-color: #55C8E8; box-shadow: 0 0 0 3px rgba(85,200,232,0.15); background: #fff; }
+.response-textarea.ta-sm { min-height: 64px; }
+.response-textarea.ta-lg { min-height: 110px; }
+
+/* ── Gathered Answers ── */
+.gathered-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin: 24px 0; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.06); }
+.gathered-header { background: linear-gradient(135deg, #0E1C42, #1A2D5A); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+.gathered-header-icon { font-size: 24px; }
+.gathered-header-label { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
+.gathered-header-title { font-size: 18px; color: #fff; font-weight: 800; line-height: 1.2; }
+.gathered-body { padding: 16px 20px 18px; }
+.gathered-intro { font-size: 14px; color: #5A4D3E; line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+.gathered-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1.5px solid #E8DDD2; }
+.gathered-name-label { font-size: 13px; color: #0E1C42; font-weight: 800; white-space: nowrap; }
+.gathered-name-input { flex: 1; padding: 8px 12px; border: 1.5px solid #D0C8BE; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 14px; color: #2B1D12; background: #FAFAF6; }
+.gathered-name-input:focus { outline: none; border-color: #55C8E8; background: #fff; }
+.gathered-output { width: 100%; min-height: 200px; padding: 12px 14px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #F4F0EB; font-family: 'Courier New', monospace; font-size: 13px; color: #2B1D12; resize: vertical; line-height: 1.6; white-space: pre-wrap; box-sizing: border-box; }
+.gathered-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.gathered-btn { background: #0E1C42; color: #fff; border: none; padding: 9px 18px; border-radius: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.gathered-btn:hover { background: #55C8E8; transform: translateY(-1px); }
+.gathered-btn-download { background: #34B76F; }
+.gathered-copied { display: none; margin-top: 8px; padding: 6px 12px; background: #EEF8F0; color: #1a6b35; border-radius: 8px; font-size: 13px; font-weight: 700; border: 1.5px solid #B8E8CF; }
+.gathered-copied.show { display: block; }
 </style>
 </head>
 
 <body>
 <canvas id="confettiCanvas"></canvas>
-<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">⛅ Back to Top</button>
+<button class="back-to-top" id="backToTop" type="button">⛅ Back to Top</button>
+<span id="pageTop" aria-hidden="true" style="position:absolute;top:0;left:0;width:1px;height:1px;"></span>
 
 <div class="page-wrap">
 
@@ -896,7 +924,6 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
 <div class="tab-panel" id="tab-lesson">
 
 
-  <p class="tab-orientation">Now learn the main science idea.</p>
 
   <!-- UPLOADED LESSON IMAGE -->
   <div class="lesson-figure">
@@ -1541,8 +1568,11 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
         <div class="kc-label">📝 Part B — Write &amp; Explain</div>
         <p>Think about the weather observation you recorded today.</p>
         <p><strong>What did you observe?</strong> Describe the specific conditions you recorded — temperature, clouds, precipitation, and wind.</p>
+        <textarea class="response-textarea" id="cer-1" data-label="Write & Explain — What did you observe?" placeholder="I observed…" oninput="refreshGathered()"></textarea>
         <p><strong>What does that tell you?</strong> Based on those conditions, what type of weather pattern might be forming? What do you predict will come next?</p>
+        <textarea class="response-textarea" id="cer-2" data-label="Write & Explain — What does that tell you?" placeholder="Based on these conditions, I think…" oninput="refreshGathered()"></textarea>
         <p><strong>Why do you think that?</strong> Use one detail from your observation to explain your prediction. Connect it to something you learned about weather patterns today.</p>
+        <textarea class="response-textarea ta-lg" id="cer-3" data-label="Write & Explain — Why do you think that?" placeholder="I think this because…" oninput="refreshGathered()"></textarea>
       </div>
 
       <!-- PART C -->
@@ -1552,6 +1582,31 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
       <div class="callout callout-think">
         <span class="callout-icon">💭</span>
         <p><strong>Think about it:</strong> Look back at the Notice &amp; Wonder you wrote at the start of today's lesson. Did you observe or predict anything correctly? What would you change about your original prediction now?</p>
+      </div>
+
+
+      <!-- ═══ GATHERED ANSWERS ═══ -->
+      <div class="gathered-card">
+        <div class="gathered-header">
+          <div class="gathered-header-icon">📋</div>
+          <div>
+            <div class="gathered-header-label">Lesson 2.01 · Submission Packet</div>
+            <div class="gathered-header-title">Gathered Answers</div>
+          </div>
+        </div>
+        <div class="gathered-body">
+          <div class="gathered-intro">All of your written responses — gathered in one place so you can copy or download them for Canvas turn-in.</div>
+          <div class="gathered-name-row">
+            <span class="gathered-name-label">Your name:</span>
+            <input type="text" class="gathered-name-input" id="student-name" placeholder="Type your name here" oninput="refreshGathered()" />
+          </div>
+          <textarea class="gathered-output" id="gatheredOutput" readonly></textarea>
+          <div class="gathered-actions">
+            <button class="gathered-btn" onclick="copyGathered()">📋 Copy to Clipboard</button>
+            <button class="gathered-btn gathered-btn-download" onclick="downloadGathered()">⬇ Download as Text</button>
+          </div>
+          <div class="gathered-copied" id="copiedMsg">Copied! Paste into your Canvas text box to turn in.</div>
+        </div>
       </div>
 
       <!-- WHAT TO TURN IN -->
@@ -1583,22 +1638,25 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
             </div>
           </div>
           <p style="font-size:15px;color:#5A4D3E;margin-bottom:12px;">Make sure your submission includes all of these:</p>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
-            <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #AED6F1;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EAF8FD;">☐</div>
-            <span style="font-size:16px;color:#2B1D12;font-weight:600;">My completed Weather Observation Log — all four conditions, my drawing, and my prediction.</span>
+          <div class="turn-in-checklist">
+          <div class="turn-in-item" onclick="toggleCheck(this)">
+            <div class="check-icon">☐</div>
+            <span>My completed Weather Observation Log — all four conditions, my drawing, and my prediction.</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
-            <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #AED6F1;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EAF8FD;">☐</div>
-            <span style="font-size:16px;color:#2B1D12;font-weight:600;">Part A — weather symbols drawn, labeled, and with examples.</span>
+          <div class="turn-in-item" onclick="toggleCheck(this)">
+            <div class="check-icon">☐</div>
+            <span>Part A — weather symbols drawn, labeled, and with examples.</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
-            <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #AED6F1;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EAF8FD;">☐</div>
-            <span style="font-size:16px;color:#2B1D12;font-weight:600;">My Write &amp; Explain (Part B) response in complete sentences using at least one vocabulary word.</span>
+          <div class="turn-in-item" onclick="toggleCheck(this)">
+            <div class="check-icon">☐</div>
+            <span>My Write &amp; Explain (Part B) response in complete sentences using at least one vocabulary word.</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;cursor:pointer;">
-            <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #AED6F1;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EAF8FD;">☐</div>
-            <span style="font-size:16px;color:#2B1D12;font-weight:600;">Part C — labeled sky sketch with clouds, sun, precipitation, and temperature.</span>
+          <div class="turn-in-item" onclick="toggleCheck(this)">
+            <div class="check-icon">☐</div>
+            <span>Part C — labeled sky sketch with clouds, sun, precipitation, and temperature.</span>
           </div>
+          </div><!-- /turn-in-checklist -->
+</div>
         </div>
       </div>
 
@@ -1649,13 +1707,19 @@ function switchTab(name) {
 function toggleCheck(item) {
   item.classList.toggle('checked');
   var icon = item.querySelector('.check-icon');
-  icon.textContent = item.classList.contains('checked') ? '⛅' : '☐';
-  var items = document.querySelectorAll('.checklist-item');
-  setTimeout(function(){
-    if (Array.from(items).every(function(it){ return it.classList.contains('checked'); })){
-      setTimeout(window.launchConfetti,200);
-    }
-  },50);
+  if (icon) {
+    icon.textContent = item.classList.contains('checked') ? LESSON_EMOJI : '';
+  }
+  var checklist = item.closest('.turn-in-checklist');
+  if (!checklist) return;
+  var items = checklist.querySelectorAll('.turn-in-item');
+  if (items.length === 0) return;
+  var allChecked = Array.prototype.every.call(items, function(it){
+    return it.classList.contains('checked');
+  });
+  if (allChecked) {
+    setTimeout(window.launchConfetti, 200);
+  }
 }
 
 // ── Clickable Diagram ──
@@ -1727,43 +1791,50 @@ document.querySelectorAll('.vtip').forEach(function(tip){
     if(left<8) left=8;
     if(left+bw>window.innerWidth-8) left=window.innerWidth-bw-8;
     box.style.left=left+'px';
-    var topPos=rect.top-140;
+    // Temporarily show off-screen to measure height
+    box.style.visibility='hidden'; box.style.opacity='0'; box.style.display='block';
+    var bh=box.offsetHeight||80;
+    box.style.display=''; box.style.visibility=''; box.style.opacity='';
+    var topPos=rect.top-bh-14;
     if(topPos<8) topPos=rect.bottom+10;
     box.style.top=topPos+'px';
   });
 });
 
 // ── Back to Top ──
-(function(){
+(function() {
   var btn = document.getElementById('backToTop');
-  if (btn) { btn.textContent = LESSON_EMOJI + ' Back to Top'; }
+  if (!btn) return;
 
-  // Direct style toggle — avoids class specificity conflicts
-  function showBtn()  { btn.style.display = 'flex'; }
-  function hideBtn()  { btn.style.display = 'none'; }
+  var inIframe = (function() {
+    try { return window.self !== window.top; }
+    catch (e) { return true; }
+  })();
 
-  // Method 1: standard scroll on window + document (covers most browsers)
-  function onScroll() {
-    var y = window.pageYOffset
-          || document.documentElement.scrollTop
-          || document.body.scrollTop
-          || 0;
-    y > 300 ? showBtn() : hideBtn();
-  }
-  window.addEventListener('scroll',   onScroll, { passive: true });
-  document.addEventListener('scroll', onScroll, { passive: true });
-
-  // Method 2: IntersectionObserver watches the header leaving the viewport.
-  // This fires reliably even inside Canvas iframes where the parent page scrolls.
-  if (window.IntersectionObserver) {
-    var header = document.querySelector('.header');
-    if (header) {
-      new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          e.isIntersecting ? hideBtn() : showBtn();
-        });
-      }, { threshold: 0 }).observe(header);
+  btn.addEventListener('click', function() {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    var top = document.getElementById('pageTop');
+    if (top && top.scrollIntoView) {
+      try { top.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
     }
+    try {
+      if (window.frameElement && window.frameElement.scrollIntoView) {
+        window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } catch (e) {}
+    if (inIframe) {
+      try { window.parent.postMessage({ type: 'optima-lesson:scroll-to-top' }, '*'); } catch (e) {}
+    }
+  });
+
+  if (inIframe) {
+    setTimeout(function() { btn.classList.add('show'); }, 1500);
+  } else {
+    window.addEventListener('scroll', function() {
+      btn.classList.toggle('show', window.pageYOffset > 400);
+    });
   }
 })();
 
@@ -1783,6 +1854,7 @@ document.querySelectorAll('.vtip').forEach(function(tip){
   // Measure natural heights once so we can offset the tab bar correctly.
   var progH = progBar.offsetHeight || 38;
 
+  // Use rootMargin to prevent flicker at the boundary
   new IntersectionObserver(function(entries) {
     var gone = !entries[0].isIntersecting;
     if (gone) {
@@ -1791,25 +1863,22 @@ document.querySelectorAll('.vtip').forEach(function(tip){
       progBar.style.left     = '0';
       progBar.style.right    = '0';
       progBar.style.zIndex   = '110';
+      progBar.style.maxWidth = '920px';
+      progBar.style.margin   = '0 auto';
       tabBar.style.position  = 'fixed';
       tabBar.style.top       = progH + 'px';
       tabBar.style.left      = '0';
       tabBar.style.right     = '0';
       tabBar.style.zIndex    = '100';
-      // Push content down so the fixed bars don't overlap it
+      tabBar.style.maxWidth  = '920px';
+      tabBar.style.margin    = '0 auto';
       document.querySelector('.page-wrap').style.paddingTop = (progH + tabBar.offsetHeight) + 'px';
     } else {
-      progBar.style.position = '';
-      progBar.style.top      = '';
-      progBar.style.left     = '';
-      progBar.style.right    = '';
-      tabBar.style.position  = '';
-      tabBar.style.top       = '';
-      tabBar.style.left      = '';
-      tabBar.style.right     = '';
+      progBar.style.cssText = '';
+      tabBar.style.cssText  = '';
       document.querySelector('.page-wrap').style.paddingTop = '';
     }
-  }, { threshold: 0 }).observe(header);
+  }, { threshold: 0, rootMargin: '-1px 0px 0px 0px' }).observe(header);
 })();
 
 // ── Scroll Reveal ──
@@ -1827,77 +1896,39 @@ document.querySelectorAll('.vtip').forEach(function(tip){
   var ctx    = canvas.getContext('2d');
   var particles = [], animating = false;
   var colors = ['#52B788','#F9A825','#FDD835','#4DD0E1','#2E7D32','#7B5EA7','#FF8F00','#0288D1'];
-  var scienceEmojis = ['🔍','🧪','🔬','🔭','🌱','🚀'];
   function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   window.addEventListener('resize', resize); resize();
-
   function Particle(x, y) {
-    this.x = x; this.y = y;
-    this.vx = (Math.random() - 0.5) * 14;
-    this.vy = Math.random() * -16 - 4;
-    this.gravity = 0.42;
-    this.drag = 0.98;
-    this.rotation = Math.random() * 360;
-    this.rotSpeed = (Math.random() - 0.5) * 10;
-    this.opacity = 1;
-    this.isEmoji = Math.random() < 0.15;
-    if (this.isEmoji) {
-      this.emoji = scienceEmojis[Math.floor(Math.random() * scienceEmojis.length)];
-      this.size = Math.random() * 8 + 22;
-      this.gravity = 0.38;
-    } else {
-      this.size = Math.random() * 7 + 4;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
-      this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
-    }
+    this.x=x; this.y=y; this.vx=(Math.random()-.5)*16; this.vy=Math.random()*-18-4;
+    this.gravity=.45; this.drag=.98; this.size=Math.random()*8+4;
+    this.color=colors[Math.floor(Math.random()*colors.length)];
+    this.rotation=Math.random()*360; this.rotSpeed=(Math.random()-.5)*12;
+    this.opacity=1; this.shape=Math.random()>.5?'rect':'circle';
   }
-
-  function burst(x, y, count) {
-    for (var i = 0; i < count; i++) particles.push(new Particle(x, y));
-    if (!animating) { animating = true; animate(); }
+  function burst(x,y,count){
+    for(var i=0;i<count;i++) particles.push(new Particle(x,y));
+    if(!animating){ animating=true; animate(); }
   }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = particles.length - 1; i >= 0; i--) {
-      var p = particles[i];
-      p.vy += p.gravity;
-      p.vx *= p.drag;
-      p.x += p.vx;
-      p.y += p.vy;
-      p.rotation += p.rotSpeed;
-      p.opacity -= 0.013;
-      if (p.opacity <= 0) { particles.splice(i, 1); continue; }
-      ctx.save();
-      ctx.globalAlpha = p.opacity;
-      ctx.translate(p.x, p.y);
-      if (p.isEmoji) {
-        ctx.font = p.size + 'px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(p.emoji, 0, 0);
-      } else {
-        ctx.rotate(p.rotation * Math.PI / 180);
-        ctx.fillStyle = p.color;
-        if (p.shape === 'rect') {
-          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-        } else {
-          ctx.beginPath();
-          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p,i){
+      p.vy+=p.gravity; p.vx*=p.drag; p.x+=p.vx; p.y+=p.vy;
+      p.rotation+=p.rotSpeed; p.opacity-=.008;
+      if(p.opacity<=0){ particles.splice(i,1); return; }
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if(p.shape==='rect'){ ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6); }
+      else{ ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill(); }
       ctx.restore();
-    }
-    if (particles.length > 0) { requestAnimationFrame(animate); }
-    else { animating = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    });
+    if(particles.length>0){ requestAnimationFrame(animate); }
+    else{ animating=false; ctx.clearRect(0,0,canvas.width,canvas.height); }
   }
-
-  window.launchConfetti = function() {
-    var cx = window.innerWidth / 2;
-    burst(cx - 100, window.innerHeight * 0.45, 40);
-    burst(cx,       window.innerHeight * 0.35, 50);
-    burst(cx + 100, window.innerHeight * 0.45, 40);
+  window.launchConfetti = function(){
+    var cx = window.innerWidth/2;
+    burst(cx-100, window.innerHeight*.45, 50);
+    burst(cx,     window.innerHeight*.35, 60);
+    burst(cx+100, window.innerHeight*.45, 50);
   };
 })();
 
@@ -1906,7 +1937,10 @@ var introCards=document.querySelectorAll('.intro-2col .card');
 introCards.forEach(function(card){
   var head=card.querySelector('.card-head');
   if(!head) return;
-  head.addEventListener('click',function(){ card.classList.toggle('collapsed'); });
+  head.addEventListener('click',function(){
+    var willCollapse = !card.classList.contains('collapsed');
+    introCards.forEach(function(c){ c.classList.toggle('collapsed', willCollapse); });
+  });
 });
 
 // ── Init ──
@@ -1914,6 +1948,82 @@ document.querySelector('[data-tab="vocab"]').classList.add('visited');
 tabProgress['vocab']=true;
 document.getElementById('progressFill').style.width='20%';
 document.getElementById('progressPct').textContent='20%';
+(function(){
+  var btt = document.getElementById('backToTop');
+  if (btt) { btt.textContent = LESSON_EMOJI + ' Back to Top'; }
+})();
+
+// ── Gathered Answers ──
+function refreshGathered() {
+  var out = document.getElementById('gatheredOutput'); if (!out) return;
+  var lines = [];
+  var nameEl = document.getElementById('student-name'); var name = nameEl ? nameEl.value.trim() : '';
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('  OPTIMA ACADEMY ONLINE — 3RD GRADE SCIENCE');
+  lines.push('  Lesson 2.01 · Weather Patterns');
+  lines.push('  Student: ' + (name || '(add your name above)'));
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('');
+  var textareas = document.querySelectorAll('.response-textarea[data-label]');
+  textareas.forEach(function(ta) {
+    lines.push('--- ' + ta.getAttribute('data-label').toUpperCase() + ' ---');
+    lines.push(ta.value.trim() || '(not yet answered)');
+    lines.push('');
+  });
+  out.value = lines.join('\n');
+}
+function copyGathered() {
+  refreshGathered();
+  var out = document.getElementById('gatheredOutput'); out.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  var msg = document.getElementById('copiedMsg');
+  if (msg) { msg.classList.add('show'); setTimeout(function(){ msg.classList.remove('show'); }, 2400); }
+}
+function downloadGathered() {
+  refreshGathered();
+  var text = document.getElementById('gatheredOutput').value;
+  var blob = new Blob([text], {type: 'text/plain'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'lesson-2-01-weather-patterns.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+document.addEventListener('input', function(e) {
+  if (e.target.classList.contains('response-textarea') || e.target.id === 'student-name') {
+    var panel = document.getElementById('tab-assignment');
+    if (panel && panel.classList.contains('active')) refreshGathered();
+  }
+});
+(function(){
+  var origSwitch = window.switchTab;
+  if (origSwitch) {
+    window.switchTab = function(id) { origSwitch(id); if (id === 'assignment') setTimeout(refreshGathered, 50); };
+  }
+})();
+
+// ── Auto-Save (persistence) ──
+var _lessonKey = (document.title || 'science-lesson').replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase();
+(function(){
+  document.querySelectorAll('textarea.response-textarea').forEach(function(t){
+    if(!t.id) return;
+    try{ var v = localStorage.getItem(_lessonKey+'-'+t.id); if(v){ t.value = v; } }catch(e){}
+    t.addEventListener('input', function(){ try{ localStorage.setItem(_lessonKey+'-'+this.id, this.value); }catch(e){} });
+  });
+  var nameEl = document.getElementById('student-name');
+  if(nameEl){
+    try{ var v = localStorage.getItem(_lessonKey+'-student-name'); if(v){ nameEl.value = v; } }catch(e){}
+    nameEl.addEventListener('input', function(){ try{ localStorage.setItem(_lessonKey+'-student-name', this.value); }catch(e){} });
+  }
+  setTimeout(refreshGathered, 100);
+})();
+
+// ── Warn before leaving ──
+window.addEventListener('beforeunload', function(e){
+  var hasWork = false;
+  document.querySelectorAll('textarea.response-textarea').forEach(function(t){
+    if(t.value && t.value.trim().length > 0){ hasWork = true; }
+  });
+  if(hasWork){ e.preventDefault(); e.returnValue = ''; }
+});
 </script>
 
 <!-- Video Manifest Loader -->

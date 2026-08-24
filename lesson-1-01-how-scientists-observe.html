@@ -637,6 +637,25 @@ details > div { padding: 12px 18px 14px; font-size: 16px; color: #5A4D3E; line-h
 .tab-next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(45,106,79,0.4); }
 
 /* ── Interactive Checklist ── */
+.turn-in-checklist { display: flex; flex-direction: column; gap: 10px; }
+.turn-in-item {
+  display: flex; align-items: center; gap: 14px; padding: 12px 16px;
+  background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.turn-in-item:hover { background: #F4FAF5; border-color: #C4E5CC; }
+.turn-in-item.checked { background: #EEF8F0; border-color: #B8E8CF; }
+.turn-in-item .check-icon {
+  width: 32px; height: 32px; border-radius: 50%; border: 2.5px solid #C4E5CC;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 14px; color: #9A8E82; background: #EEF8F0;
+}
+.turn-in-item.checked .check-icon {
+  border-color: transparent; background: transparent; font-size: 22px;
+}
+.turn-in-item span { font-size: 16px; color: #2B1D12; font-weight: 600; }
+.turn-in-item.checked span { color: #5A4D3E; }
+
 .checklist-item:hover { background: #EEF8F0 !important; }
 .checklist-item.checked { background: #EEF8F0 !important; border-color: #B8E8CF !important; }
 .checklist-item.checked .check-icon { border-color: transparent !important; background: transparent !important; font-size: 22px !important; }
@@ -703,7 +722,8 @@ em { color: #5A4D3E; }
 <body>
 
 <canvas id="confettiCanvas"></canvas>
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">🔬 Back to Top</button>
+<button class="back-to-top" id="backToTop" type="button">🔬 Back to Top</button>
+<span id="pageTop" aria-hidden="true" style="position:absolute;top:0;left:0;width:1px;height:1px;"></span>
 
 <div class="page-wrap">
 
@@ -2097,22 +2117,24 @@ em { color: #5A4D3E; }
 
           <p style="font-size:15px;color:#5A4D3E;margin-bottom:12px;">Make sure your submission includes all of these:</p>
 
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
+          <div class="turn-in-checklist">
+          <div class="turn-in-item" onclick="toggleCheck(this)">
             <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #C4E5CC;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EEF8F0;">☐</div>
             <span style="font-size:16px;color:#2B1D12;font-weight:600;">My observation notes and labeled drawing from the Explore investigation.</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
+          <div class="turn-in-item" onclick="toggleCheck(this)">
             <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #C4E5CC;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EEF8F0;">☐</div>
             <span style="font-size:16px;color:#2B1D12;font-weight:600;">Part A — Sort It Out (vocabulary matching).</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
+          <div class="turn-in-item" onclick="toggleCheck(this)">
             <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #C4E5CC;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EEF8F0;">☐</div>
             <span style="font-size:16px;color:#2B1D12;font-weight:600;">My Write &amp; Explain (Part B) response in complete sentences using vocabulary words.</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;cursor:pointer;">
+          <div class="turn-in-item" onclick="toggleCheck(this)">
             <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #C4E5CC;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EEF8F0;">☐</div>
             <span style="font-size:16px;color:#2B1D12;font-weight:600;">Part C — Draw &amp; Label (field scientist drawing with 2 tools labeled).</span>
           </div>
+          </div><!-- /turn-in-checklist -->
 
         </div>
       </div>
@@ -2164,17 +2186,19 @@ function switchTab(name) {
 function toggleCheck(item) {
   item.classList.toggle('checked');
   var icon = item.querySelector('.check-icon');
-  if (item.classList.contains('checked')) {
-    icon.textContent = '🌲';
-  } else {
-    icon.textContent = '☐';
+  if (icon) {
+    icon.textContent = item.classList.contains('checked') ? LESSON_EMOJI : '';
   }
-  var items = document.querySelectorAll('.checklist-item');
-  setTimeout(function(){
-    if (Array.from(items).every(function(it){ return it.classList.contains('checked'); })) {
-      setTimeout(window.launchConfetti, 200);
-    }
-  }, 50);
+  var checklist = item.closest('.turn-in-checklist');
+  if (!checklist) return;
+  var items = checklist.querySelectorAll('.turn-in-item');
+  if (items.length === 0) return;
+  var allChecked = Array.prototype.every.call(items, function(it){
+    return it.classList.contains('checked');
+  });
+  if (allChecked) {
+    setTimeout(window.launchConfetti, 200);
+  }
 }
 
 // ── Clickable Diagram ──
@@ -2257,11 +2281,19 @@ document.querySelectorAll('.vtip').forEach(function(tip) {
   tip.addEventListener('mouseenter', function() {
     var rect = tip.getBoundingClientRect();
     var bw   = 250;
+    // Temporarily show off-screen to measure height
+    box.style.visibility = 'hidden';
+    box.style.opacity = '0';
+    box.style.display = 'block';
+    var bh = box.offsetHeight || 80;
+    box.style.display = '';
+    box.style.visibility = '';
+    box.style.opacity = '';
     var left = rect.left + rect.width / 2 - bw / 2;
     if (left < 8) left = 8;
     if (left + bw > window.innerWidth - 8) left = window.innerWidth - bw - 8;
     box.style.left = left + 'px';
-    var topPos = rect.top - 140;
+    var topPos = rect.top - bh - 14;
     if (topPos < 8) topPos = rect.bottom + 10;
     box.style.top = topPos + 'px';
   });
@@ -2270,8 +2302,38 @@ document.querySelectorAll('.vtip').forEach(function(tip) {
 // ── Back to Top ──
 (function() {
   var btn = document.getElementById('backToTop');
-  if (btn) { btn.textContent = LESSON_EMOJI + ' Back to Top'; }
-  window.addEventListener('scroll', function(){ btn.classList.toggle('show', window.pageYOffset > 400); });
+  if (!btn) return;
+
+  var inIframe = (function() {
+    try { return window.self !== window.top; }
+    catch (e) { return true; }
+  })();
+
+  btn.addEventListener('click', function() {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    var top = document.getElementById('pageTop');
+    if (top && top.scrollIntoView) {
+      try { top.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+    }
+    try {
+      if (window.frameElement && window.frameElement.scrollIntoView) {
+        window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } catch (e) {}
+    if (inIframe) {
+      try { window.parent.postMessage({ type: 'optima-lesson:scroll-to-top' }, '*'); } catch (e) {}
+    }
+  });
+
+  if (inIframe) {
+    setTimeout(function() { btn.classList.add('show'); }, 1500);
+  } else {
+    window.addEventListener('scroll', function() {
+      btn.classList.toggle('show', window.pageYOffset > 400);
+    });
+  }
 })();
 
 // ── Scroll Reveal ──
@@ -2294,29 +2356,15 @@ document.querySelectorAll('.vtip').forEach(function(tip) {
   var ctx    = canvas.getContext('2d');
   var particles = [], animating = false;
   var colors = ['#52B788','#F9A825','#FDD835','#4DD0E1','#2E7D32','#7B5EA7','#FF8F00','#0288D1'];
-  var scienceEmojis = ['🔍','🧪','🔬','🔭','🌱','🚀'];
   function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   window.addEventListener('resize', resize); resize();
 
   function Particle(x, y) {
-    this.x = x; this.y = y;
-    this.vx = (Math.random() - 0.5) * 14;
-    this.vy = Math.random() * -16 - 4;
-    this.gravity = 0.42;
-    this.drag = 0.98;
-    this.rotation = Math.random() * 360;
-    this.rotSpeed = (Math.random() - 0.5) * 10;
-    this.opacity = 1;
-    this.isEmoji = Math.random() < 0.15;
-    if (this.isEmoji) {
-      this.emoji = scienceEmojis[Math.floor(Math.random() * scienceEmojis.length)];
-      this.size = Math.random() * 8 + 22;
-      this.gravity = 0.38;
-    } else {
-      this.size = Math.random() * 7 + 4;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
-      this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
-    }
+    this.x=x; this.y=y; this.vx=(Math.random()-.5)*16; this.vy=Math.random()*-18-4;
+    this.gravity=.45; this.drag=.98; this.size=Math.random()*8+4;
+    this.color=colors[Math.floor(Math.random()*colors.length)];
+    this.rotation=Math.random()*360; this.rotSpeed=(Math.random()-.5)*12;
+    this.opacity=1; this.shape=Math.random()>.5?'rect':'circle';
   }
 
   function burst(x, y, count) {
@@ -2324,47 +2372,27 @@ document.querySelectorAll('.vtip').forEach(function(tip) {
     if (!animating) { animating = true; animate(); }
   }
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = particles.length - 1; i >= 0; i--) {
-      var p = particles[i];
-      p.vy += p.gravity;
-      p.vx *= p.drag;
-      p.x += p.vx;
-      p.y += p.vy;
-      p.rotation += p.rotSpeed;
-      p.opacity -= 0.013;
-      if (p.opacity <= 0) { particles.splice(i, 1); continue; }
-      ctx.save();
-      ctx.globalAlpha = p.opacity;
-      ctx.translate(p.x, p.y);
-      if (p.isEmoji) {
-        ctx.font = p.size + 'px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(p.emoji, 0, 0);
-      } else {
-        ctx.rotate(p.rotation * Math.PI / 180);
-        ctx.fillStyle = p.color;
-        if (p.shape === 'rect') {
-          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-        } else {
-          ctx.beginPath();
-          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p,i){
+      p.vy+=p.gravity; p.vx*=p.drag; p.x+=p.vx; p.y+=p.vy;
+      p.rotation+=p.rotSpeed; p.opacity-=.008;
+      if(p.opacity<=0){ particles.splice(i,1); return; }
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if(p.shape==='rect'){ ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6); }
+      else{ ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill(); }
       ctx.restore();
-    }
-    if (particles.length > 0) { requestAnimationFrame(animate); }
-    else { animating = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    });
+    if(particles.length>0){ requestAnimationFrame(animate); }
+    else{ animating=false; ctx.clearRect(0,0,canvas.width,canvas.height); }
   }
 
-  window.launchConfetti = function() {
-    var cx = window.innerWidth / 2;
-    burst(cx - 100, window.innerHeight * 0.45, 40);
-    burst(cx,       window.innerHeight * 0.35, 50);
-    burst(cx + 100, window.innerHeight * 0.45, 40);
+  window.launchConfetti = function(){
+    var cx = window.innerWidth/2;
+    burst(cx-100, window.innerHeight*.45, 50);
+    burst(cx,     window.innerHeight*.35, 60);
+    burst(cx+100, window.innerHeight*.45, 50);
   };
 })();
 
@@ -2374,7 +2402,10 @@ introCards.forEach(function(card){
   var head = card.querySelector('.card-head');
   if (!head) return;
   head.addEventListener('click', function(){
-    card.classList.toggle('collapsed');
+    var willCollapse = !card.classList.contains('collapsed');
+    introCards.forEach(function(c){
+      c.classList.toggle('collapsed', willCollapse);
+    });
   });
 });
 
@@ -2383,6 +2414,10 @@ document.querySelector('[data-tab="vocab"]').classList.add('visited');
 tabProgress['vocab'] = true;
 document.getElementById('progressFill').style.width = '20%';
 document.getElementById('progressPct').textContent = '20%';
+(function(){
+  var btt = document.getElementById('backToTop');
+  if (btt) { btt.textContent = LESSON_EMOJI + ' Back to Top'; }
+})();
 </script>
 <!-- SUGGESTED IMAGES
   images/1-01-field-scientist-notes.png     — field biologist writing in Everglades marsh at sunrise (Lesson tab, Section 3)

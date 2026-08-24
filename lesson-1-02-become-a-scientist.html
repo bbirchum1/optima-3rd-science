@@ -598,18 +598,21 @@ body {
 .footer-line3 { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
 
 /* ── Back to Top ── */
-#backToTop {
-  position: fixed; bottom: 2rem; right: 2rem;
-  display: none; align-items: center; gap: 0.5rem;
-  padding: 0.6rem 1.2rem; border-radius: 999px;
-  background: #2D6A4F; color: #fff; font-family: inherit;
-  font-size: 14px; font-weight: 700; border: none; cursor: pointer;
-  box-shadow: 0 4px 14px rgba(45,106,79,0.35);
-  transition: opacity 0.3s, transform 0.2s;
+.back-to-top {
+  position: fixed; bottom: 28px; right: 28px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 40px;
+  background: linear-gradient(135deg,#2D6A4F,#1B4332);
+  color: #fff; font-family: inherit;
+  font-size: 15px; font-weight: 700; border: none; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(45,106,79,0.35);
+  opacity: 0; visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 0.35s, visibility 0.35s, transform 0.35s, box-shadow 0.2s;
   z-index: 200;
 }
-#backToTop:hover { transform: translateY(-2px); }
-#backToTop.show { display: flex; }
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { box-shadow: 0 6px 20px rgba(45,106,79,0.5); transform: translateY(-3px); }
 
 /* ── Confetti Canvas ── */
 #confettiCanvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
@@ -619,7 +622,8 @@ body {
 <body>
 
 <canvas id="confettiCanvas"></canvas>
-<button id="backToTop" aria-label="Back to top">🔬 Back to Top</button>
+<button class="back-to-top" id="backToTop" type="button">🔬 Back to Top</button>
+<span id="pageTop" aria-hidden="true" style="position:absolute;top:0;left:0;width:1px;height:1px;"></span>
 
 <div class="page-wrap">
 
@@ -1247,13 +1251,14 @@ body {
 <!-- ══════════════════════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-lesson">
 
-  <p class="tab-orientation">Now learn the main science idea.</p>
-
-
   <!-- UPLOADED LESSON IMAGE -->
   <div class="lesson-figure">
+    <div class="lesson-figure-label">📷 Photo · Young Scientists at Work</div>
     <img src="images/1-02-scientist-observation.avif"
          alt="Students exploring nature outdoors, crouching to observe plants and natural objects up close" />
+    <div class="lesson-figure-caption">
+      Real scientists start just like this — getting close, looking carefully, and writing down what they notice. What senses would <strong>you</strong> use here?
+    </div>
   </div>
 
   <!-- ACTIVITY 2: CORE LESSON CONTENT -->
@@ -1770,18 +1775,20 @@ body {
           </div>
 
           <p style="font-size:15px;color:#5A4D3E;margin-bottom:12px;">Make sure your submission includes all of these:</p>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
-            <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #C4E5CC;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EEF8F0;">☐</div>
-            <span style="font-size:16px;color:#2B1D12;font-weight:600;">My investigation notes — observations labeled by sense, plus my inference.</span>
+          <div class="turn-in-checklist">
+          <div class="turn-in-item" onclick="toggleCheck(this)">
+            <div class="check-icon">☐</div>
+            <span>My investigation notes — observations labeled by sense, plus my inference.</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;margin-bottom:10px;cursor:pointer;">
-            <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #C4E5CC;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EEF8F0;">☐</div>
-            <span style="font-size:16px;color:#2B1D12;font-weight:600;">My Write &amp; Explain (Part B) response in complete sentences.</span>
+          <div class="turn-in-item" onclick="toggleCheck(this)">
+            <div class="check-icon">☐</div>
+            <span>My Write &amp; Explain (Part B) response in complete sentences.</span>
           </div>
-          <div class="checklist-item" onclick="toggleCheck(this)" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FAFAF6;border:2px solid #E8DDD2;border-radius:14px;cursor:pointer;">
-            <div class="check-icon" style="width:32px;height:32px;border-radius:50%;border:2.5px solid #C4E5CC;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:#9A8E82;background:#EEF8F0;">☐</div>
-            <span style="font-size:16px;color:#2B1D12;font-weight:600;">My scientific sketch with at least 3 labeled parts.</span>
+          <div class="turn-in-item" onclick="toggleCheck(this)">
+            <div class="check-icon">☐</div>
+            <span>My scientific sketch with at least 3 labeled parts.</span>
           </div>
+          </div><!-- /turn-in-checklist -->
 
         </div>
       </div>
@@ -1833,17 +1840,19 @@ function switchTab(name) {
 function toggleCheck(item) {
   item.classList.toggle('checked');
   var icon = item.querySelector('.check-icon');
-  if (item.classList.contains('checked')) {
-    icon.textContent = '🌲';
-  } else {
-    icon.textContent = '☐';
+  if (icon) {
+    icon.textContent = item.classList.contains('checked') ? LESSON_EMOJI : '';
   }
-  var items = document.querySelectorAll('.checklist-item');
-  setTimeout(function(){
-    if (Array.from(items).every(function(it){ return it.classList.contains('checked'); })) {
-      setTimeout(window.launchConfetti, 200);
-    }
-  }, 50);
+  var checklist = item.closest('.turn-in-checklist');
+  if (!checklist) return;
+  var items = checklist.querySelectorAll('.turn-in-item');
+  if (items.length === 0) return;
+  var allChecked = Array.prototype.every.call(items, function(it){
+    return it.classList.contains('checked');
+  });
+  if (allChecked) {
+    setTimeout(window.launchConfetti, 200);
+  }
 }
 
 // ── Clickable Diagram ──
@@ -1924,8 +1933,38 @@ function checkQuiz(optEl) {
 // ── Back to Top ──
 (function() {
   var btn = document.getElementById('backToTop');
-  if (btn) { btn.textContent = LESSON_EMOJI + ' Back to Top'; }
-  window.addEventListener('scroll', function(){ btn.classList.toggle('show', window.pageYOffset > 400); });
+  if (!btn) return;
+
+  var inIframe = (function() {
+    try { return window.self !== window.top; }
+    catch (e) { return true; }
+  })();
+
+  btn.addEventListener('click', function() {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    var top = document.getElementById('pageTop');
+    if (top && top.scrollIntoView) {
+      try { top.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+    }
+    try {
+      if (window.frameElement && window.frameElement.scrollIntoView) {
+        window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } catch (e) {}
+    if (inIframe) {
+      try { window.parent.postMessage({ type: 'optima-lesson:scroll-to-top' }, '*'); } catch (e) {}
+    }
+  });
+
+  if (inIframe) {
+    setTimeout(function() { btn.classList.add('show'); }, 1500);
+  } else {
+    window.addEventListener('scroll', function() {
+      btn.classList.toggle('show', window.pageYOffset > 400);
+    });
+  }
 })();
 
 // ── Scroll Reveal ──
@@ -1943,77 +1982,39 @@ function checkQuiz(optEl) {
   var ctx    = canvas.getContext('2d');
   var particles = [], animating = false;
   var colors = ['#52B788','#F9A825','#FDD835','#4DD0E1','#2E7D32','#7B5EA7','#FF8F00','#0288D1'];
-  var scienceEmojis = ['🔍','🧪','🔬','🔭','🌱','🚀'];
   function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   window.addEventListener('resize', resize); resize();
-
   function Particle(x, y) {
-    this.x = x; this.y = y;
-    this.vx = (Math.random() - 0.5) * 14;
-    this.vy = Math.random() * -16 - 4;
-    this.gravity = 0.42;
-    this.drag = 0.98;
-    this.rotation = Math.random() * 360;
-    this.rotSpeed = (Math.random() - 0.5) * 10;
-    this.opacity = 1;
-    this.isEmoji = Math.random() < 0.15;
-    if (this.isEmoji) {
-      this.emoji = scienceEmojis[Math.floor(Math.random() * scienceEmojis.length)];
-      this.size = Math.random() * 8 + 22;
-      this.gravity = 0.38;
-    } else {
-      this.size = Math.random() * 7 + 4;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
-      this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
-    }
+    this.x=x; this.y=y; this.vx=(Math.random()-.5)*16; this.vy=Math.random()*-18-4;
+    this.gravity=.45; this.drag=.98; this.size=Math.random()*8+4;
+    this.color=colors[Math.floor(Math.random()*colors.length)];
+    this.rotation=Math.random()*360; this.rotSpeed=(Math.random()-.5)*12;
+    this.opacity=1; this.shape=Math.random()>.5?'rect':'circle';
   }
-
-  function burst(x, y, count) {
-    for (var i = 0; i < count; i++) particles.push(new Particle(x, y));
-    if (!animating) { animating = true; animate(); }
+  function burst(x,y,count){
+    for(var i=0;i<count;i++) particles.push(new Particle(x,y));
+    if(!animating){ animating=true; animate(); }
   }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = particles.length - 1; i >= 0; i--) {
-      var p = particles[i];
-      p.vy += p.gravity;
-      p.vx *= p.drag;
-      p.x += p.vx;
-      p.y += p.vy;
-      p.rotation += p.rotSpeed;
-      p.opacity -= 0.013;
-      if (p.opacity <= 0) { particles.splice(i, 1); continue; }
-      ctx.save();
-      ctx.globalAlpha = p.opacity;
-      ctx.translate(p.x, p.y);
-      if (p.isEmoji) {
-        ctx.font = p.size + 'px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(p.emoji, 0, 0);
-      } else {
-        ctx.rotate(p.rotation * Math.PI / 180);
-        ctx.fillStyle = p.color;
-        if (p.shape === 'rect') {
-          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-        } else {
-          ctx.beginPath();
-          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p,i){
+      p.vy+=p.gravity; p.vx*=p.drag; p.x+=p.vx; p.y+=p.vy;
+      p.rotation+=p.rotSpeed; p.opacity-=.008;
+      if(p.opacity<=0){ particles.splice(i,1); return; }
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if(p.shape==='rect'){ ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6); }
+      else{ ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill(); }
       ctx.restore();
-    }
-    if (particles.length > 0) { requestAnimationFrame(animate); }
-    else { animating = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    });
+    if(particles.length>0){ requestAnimationFrame(animate); }
+    else{ animating=false; ctx.clearRect(0,0,canvas.width,canvas.height); }
   }
-
-  window.launchConfetti = function() {
-    var cx = window.innerWidth / 2;
-    burst(cx - 100, window.innerHeight * 0.45, 40);
-    burst(cx,       window.innerHeight * 0.35, 50);
-    burst(cx + 100, window.innerHeight * 0.45, 40);
+  window.launchConfetti = function(){
+    var cx = window.innerWidth/2;
+    burst(cx-100, window.innerHeight*.45, 50);
+    burst(cx,     window.innerHeight*.35, 60);
+    burst(cx+100, window.innerHeight*.45, 50);
   };
 })();
 
@@ -2023,7 +2024,10 @@ introCards.forEach(function(card){
   var head = card.querySelector('.card-head');
   if (!head) return;
   head.addEventListener('click', function(){
-    card.classList.toggle('collapsed');
+    var willCollapse = !card.classList.contains('collapsed');
+    introCards.forEach(function(c){
+      c.classList.toggle('collapsed', willCollapse);
+    });
   });
 });
 
@@ -2032,6 +2036,10 @@ document.querySelector('[data-tab="vocab"]').classList.add('visited');
 tabProgress['vocab'] = true;
 document.getElementById('progressFill').style.width = '20%';
 document.getElementById('progressPct').textContent = '20%';
+(function(){
+  var btt = document.getElementById('backToTop');
+  if (btt) { btt.textContent = LESSON_EMOJI + ' Back to Top'; }
+})();
 </script>
 
 <!-- Video Manifest Loader -->

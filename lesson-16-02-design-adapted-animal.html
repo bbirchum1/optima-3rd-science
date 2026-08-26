@@ -2141,5 +2141,65 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function(err) { console.warn('Video manifest load failed:', err); });
 });
 </script>
+<!-- Progress Bar Sticky Fix (iframe fallback) -->
+<script>
+(function() {
+  var pw = document.querySelector('.progress-wrap');
+  if (!pw) return;
+  var placeholder = document.createElement('div');
+  placeholder.style.display = 'none';
+  pw.parentNode.insertBefore(placeholder, pw);
+  var origTop = pw.offsetTop;
+  var fixed = false;
+
+  function check() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if (!fixed && scrollY > origTop) {
+      fixed = true;
+      placeholder.style.display = 'block';
+      placeholder.style.height = pw.offsetHeight + 'px';
+      pw.style.position = 'fixed';
+      pw.style.top = '0';
+      pw.style.left = '0';
+      pw.style.right = '0';
+      pw.style.maxWidth = '920px';
+      pw.style.margin = '0 auto';
+    } else if (fixed && scrollY <= origTop) {
+      fixed = false;
+      placeholder.style.display = 'none';
+      pw.style.position = '';
+      pw.style.top = '';
+      pw.style.left = '';
+      pw.style.right = '';
+      pw.style.maxWidth = '';
+      pw.style.margin = '';
+    }
+  }
+
+  // Only activate if sticky isn't working (iframe context)
+  var test = document.createElement('div');
+  test.style.position = 'sticky';
+  if (test.style.position === 'sticky') {
+    // Sticky is supported, but may not work in iframe — run check after a scroll
+    var activated = false;
+    window.addEventListener('scroll', function() {
+      if (!activated) {
+        // If progress-wrap isn't sticking despite being past its position, activate fallback
+        var rect = pw.getBoundingClientRect();
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollY > origTop && rect.top > 1) {
+          activated = true;
+        } else if (scrollY > origTop && rect.top <= 1) {
+          // Sticky is working fine, no fallback needed
+          return;
+        }
+      }
+      if (activated) check();
+    }, {passive: true});
+  } else {
+    window.addEventListener('scroll', check, {passive: true});
+  }
+})();
+</script>
 </body>
 </html>

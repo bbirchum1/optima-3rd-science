@@ -347,48 +347,11 @@ body {
 
 
 .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #1a3a28, #1B4332); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
-.video-placeholder-icon { font-size: 44px; margin-bottom: 10px; opacity: 0.55; }
-.video-placeholder-text { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 600; line-height: 1.5; font-family: 'Nunito', sans-serif; }
-.video-placeholder-id { font-size: 11px; color: rgba(149,213,178,0.4); font-family: monospace; margin-top: 6px; letter-spacing: 0.5px; }
+
+
 .video-feedback { display: none; }
 .video-feedback.show { display: block; }
 
-
-/* ═══════════════════════════════════════════════════════════════════════
-   VIDEO PLACEHOLDERS — Introduction video with recording notes
-   ═══════════════════════════════════════════════════════════════════════ */
-.video-ratio { position: relative; aspect-ratio: 16 / 9; height: auto; overflow: hidden; border-radius: 14px; margin: 0 0 18px; background: #000; }
-.video-placeholder {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(135deg, #0E1C42, #1A2D5A);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 24px 20px;
-  border: 2px dashed rgba(82, 183, 136, 0.4);
-  border-radius: 14px;
-}
-.video-placeholder-icon { font-size: 38px; margin-bottom: 8px; display: block; }
-.video-placeholder-label {
-  font-family: 'Nunito', sans-serif;
-  font-size: 10px; color: #52B788; text-transform: uppercase;
-  letter-spacing: 2px; font-weight: 800; margin-bottom: 6px;
-}
-.video-placeholder-title {
-  font-family: 'Nunito', sans-serif;
-  font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 8px;
-}
-.video-placeholder-filename {
-  font-family: monospace; font-size: 11px; color: #52B788;
-  background: rgba(82, 183, 136, 0.15);
-  padding: 4px 10px; border-radius: 4px; display: inline-block;
-}
-.video-placeholder-notes {
-  font-family: 'Nunito', sans-serif;
-  font-size: 12px; color: rgba(255, 255, 255, 0.8);
-  font-style: italic; margin-top: 10px; text-align: left;
-  padding: 10px 12px; background: rgba(0, 0, 0, 0.25);
-  border-radius: 6px; border-left: 3px solid #52B788;
-  max-height: 120px; overflow-y: auto;
-}
 
 /* ── Collapsible Intro Cards ── */
 .intro-2col .card .card-head { cursor: pointer; user-select: none; position: relative; }
@@ -490,6 +453,33 @@ em { color: #5A4D3E; }
   font-style: italic;
   margin: 0.5rem 0 1.2rem 0;
   padding: 0;
+}
+/* ═══ VIDEO PLACEHOLDER ═══ */
+.video-placeholder-wrap {
+  border-radius: 14px; overflow: hidden; margin: 0 0 18px;
+  border: 2px dashed rgba(82, 183, 136, 0.4);
+  background: linear-gradient(135deg, #0E1C42, #1A2D5A);
+}
+.video-placeholder-inner {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 28px 20px;
+}
+.video-placeholder-inner .vp-icon { font-size: 34px; margin-bottom: 6px; }
+.video-placeholder-inner .vp-label {
+  font-size: 10px; color: #52B788; text-transform: uppercase;
+  letter-spacing: 2px; font-weight: 800; margin-bottom: 4px;
+}
+.video-placeholder-inner .vp-title {
+  font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px;
+}
+.video-placeholder-inner .vp-slot {
+  font-family: monospace; font-size: 11px; color: #52B788;
+  background: rgba(82,183,136,0.15); padding: 3px 10px; border-radius: 4px;
+}
+.video-placeholder-inner .vp-notes {
+  font-size: 12px; color: rgba(255,255,255,0.8); font-style: italic;
+  margin-top: 10px; text-align: left; padding: 10px 12px;
+  background: rgba(0,0,0,0.25); border-radius: 6px; border-left: 3px solid #52B788;
 }
 </style>
 </head>
@@ -1080,20 +1070,19 @@ em { color: #5A4D3E; }
 
   <p class="tab-orientation">Start here. Learn the words you will use today.</p>
 
-
-<!-- ═══════════ INTRODUCTION VIDEO ═══════════ -->
-<div class="video-ratio">
-<div class="video-placeholder video-placeholder-id">
+<!-- ═══ INTRODUCTION VIDEO ═══ -->
+<div class="video-placeholder-wrap">
 <!-- slot: 32-01-intro -->
-    <span class="video-placeholder-icon">🎬</span>
-    <div class="video-placeholder-label">Introduction Video</div>
-    <div class="video-placeholder-title">Researching a National Park Ecosystem</div>
-    <div class="video-placeholder-filename">32-01-intro</div>
-    <div class="video-placeholder-notes">
-      <strong>Teacher recording notes:</strong> Introduce the capstone research project. Students will choose a national park and research its ecosystem in depth. Emphasize using reliable sources and organizing information. This is their big end-of-year project. ~60–90 seconds.
-    </div>
+<div class="video-placeholder-inner">
+  <span class="vp-icon">🎬</span>
+  <div class="vp-label">Introduction Video</div>
+  <div class="vp-title">Researching a National Park Ecosystem</div>
+  <div class="vp-slot">32-01-intro</div>
+  <div class="vp-notes">
+    <strong>Teacher recording notes:</strong> Introduce the capstone research project. Students will choose a national park and research its ecosystem in depth. Emphasize using reliable sources and organizing information. This is their big end-of-year project. ~60–90 seconds.
+  </div>
 </div>
-
+</div>
 
   <!-- ═══ ACTIVITY 1: NOTICE & WONDER ═══ -->
   <div class="activity-card act-warmup scroll-reveal">
@@ -2240,8 +2229,6 @@ document.getElementById('progressPct').textContent = '20%';
 </script>
 
 
-
-
 <!-- Video Manifest Loader -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -2249,35 +2236,25 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(function(r) { return r.json(); })
     .then(function(data) {
       var manifest = data.videos || data;
-      document.querySelectorAll('.video-placeholder-id').forEach(function(placeholder) {
-        var m = placeholder.innerHTML.match(/<!--\s*slot:\s*([\w-]+)\s*-->/);
+      document.querySelectorAll('.video-placeholder-wrap').forEach(function(wrap) {
+        var m = wrap.innerHTML.match(/<!--\s*slot:\s*([\w-]+)\s*-->/);
         if (!m) return;
         var entry = manifest[m[1]];
         if (!entry || entry.status !== 'ready' || !entry.embed) return;
-
         var temp = document.createElement('div');
         temp.innerHTML = entry.embed;
         var iframe = temp.querySelector('iframe');
         if (!iframe) return;
-
-        var wrapper = placeholder.closest('.video-ratio');
-        if (wrapper) {
-          wrapper.style.position = 'relative';
-          wrapper.style.aspectRatio = '16 / 9';
-        }
-
         iframe.removeAttribute('width');
         iframe.removeAttribute('height');
-        iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
-
-        placeholder.innerHTML = '';
-        placeholder.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;padding:0;background:#000;border:none;';
-        placeholder.appendChild(iframe);
+        iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:none;';
+        wrap.innerHTML = '';
+        wrap.style.cssText = 'border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
+        wrap.appendChild(iframe);
       });
     })
     .catch(function(err) { console.warn('Video manifest load failed:', err); });
 });
 </script>
-
 </body>
 </html>

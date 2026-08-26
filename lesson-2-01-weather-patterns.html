@@ -199,6 +199,43 @@ body {
 .need-chip { display:inline-flex; align-items:center; gap:6px; background:#fff; border:1.5px solid #C8E0B8; border-radius:20px; padding:4px 12px; font-size:13px; font-weight:700; color:#2B1D12; }
 
 /* ── Tabs ── */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   VIDEO PLACEHOLDERS — Introduction video with recording notes
+   ═══════════════════════════════════════════════════════════════════════ */
+.video-ratio { position: relative; aspect-ratio: 16 / 9; height: auto; overflow: hidden; border-radius: 14px; margin: 0 0 18px; background: #000; }
+.video-placeholder {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, #0E1C42, #1A2D5A);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 24px 20px;
+  border: 2px dashed rgba(82, 183, 136, 0.4);
+  border-radius: 14px;
+}
+.video-placeholder-icon { font-size: 38px; margin-bottom: 8px; display: block; }
+.video-placeholder-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 10px; color: #52B788; text-transform: uppercase;
+  letter-spacing: 2px; font-weight: 800; margin-bottom: 6px;
+}
+.video-placeholder-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 8px;
+}
+.video-placeholder-filename {
+  font-family: monospace; font-size: 11px; color: #52B788;
+  background: rgba(82, 183, 136, 0.15);
+  padding: 4px 10px; border-radius: 4px; display: inline-block;
+}
+.video-placeholder-notes {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px; color: rgba(255, 255, 255, 0.8);
+  font-style: italic; margin-top: 10px; text-align: left;
+  padding: 10px 12px; background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px; border-left: 3px solid #52B788;
+  max-height: 120px; overflow-y: auto;
+}
+
 .tab-bar { display:flex; background:#fff; border-bottom:2px solid #E8DDD2; position:sticky; top:38px; z-index:100; overflow-x:auto; }
 .tab-btn { flex:1; min-width:90px; padding:14px 8px; border:none; background:none; font-family:inherit; font-size:13px; font-weight:700; color:#9A8E82; cursor:pointer; border-bottom:3px solid transparent; transition:all 0.2s; position:relative; white-space:nowrap; }
 .tab-btn:hover { color:#0277BD; background:#EAF8FD; }
@@ -797,6 +834,9 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
   <span class="need-chip"><span>🌡️</span>Access to a window or weather app</span>
 </div>
 
+
+</div>
+
 <!-- ═══════════ TAB BAR ═══════════ -->
 <div class="tab-bar" id="tabBar">
   <button class="tab-btn active" data-tab="vocab"      onclick="switchTab('vocab')">📚 Vocabulary<span class="tab-check">✓</span></button>
@@ -814,6 +854,20 @@ details.go-deeper summary::before { content:'🌩️'; font-size:20px; }
 
 
   <p class="tab-orientation">Start here. Learn the words you will use today.</p>
+
+
+<!-- ═══════════ INTRODUCTION VIDEO ═══════════ -->
+<div class="video-ratio">
+<div class="video-placeholder video-placeholder-id">
+<!-- slot: 2-01-intro -->
+    <span class="video-placeholder-icon">🎬</span>
+    <div class="video-placeholder-label">Introduction Video</div>
+    <div class="video-placeholder-title">What Patterns Do We See in Weather?</div>
+    <div class="video-placeholder-filename">2-01-intro</div>
+    <div class="video-placeholder-notes">
+      <strong>Teacher recording notes:</strong> Introduce weather patterns — why scientists track weather over time, not just one day. Mention temperature, precipitation, and wind as things we can measure. Connect to students' daily experience ('Have you noticed it's hotter some weeks?'). ~60–90 seconds.
+    </div>
+</div>
 
   <!-- ACTIVITY 1: NOTICE & WONDER -->
   <div class="activity-card act-warmup scroll-reveal">
@@ -2026,44 +2080,43 @@ window.addEventListener('beforeunload', function(e){
 });
 </script>
 
+
+
+
 <!-- Video Manifest Loader -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Auto-detect manifest URL: same directory as this HTML file
-  const scriptBase = document.currentScript ? document.currentScript.src : '';
-  const pageBase = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-  const manifestUrl = pageBase + 'video-manifest.json';
+  fetch('https://raw.githubusercontent.com/bbirchum1/optima-3rd-science/main/video-manifest.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var manifest = data.videos || data;
+      document.querySelectorAll('.video-placeholder-id').forEach(function(placeholder) {
+        var m = placeholder.innerHTML.match(/<!--\s*slot:\s*([\w-]+)\s*-->/);
+        if (!m) return;
+        var entry = manifest[m[1]];
+        if (!entry || entry.status !== 'ready' || !entry.embed) return;
 
-  fetch(manifestUrl)
-    .then(r => r.json())
-    .then(manifest => {
-      document.querySelectorAll('.video-placeholder-id').forEach(el => {
-        const comment = el.innerHTML;
-        const match = comment.match(/slot:\s*([a-zA-Z0-9_-]+)/);
-        if (!match) return;
-        const slotId = match[1];
-        const entry = manifest.videos[slotId];
-        if (!entry || !entry.embed || entry.status !== 'ready') return;
+        var temp = document.createElement('div');
+        temp.innerHTML = entry.embed;
+        var iframe = temp.querySelector('iframe');
+        if (!iframe) return;
 
-        // Replace the entire .video-placeholder container
-        const placeholder = el.closest('.video-placeholder');
-        if (!placeholder) return;
-        
-        const wrapper = document.createElement('div');
-        wrapper.className = 'video-embed-wrapper';
-        wrapper.style.cssText = 'width:100%;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#000;';
-        wrapper.innerHTML = entry.embed;
-        
-        // Make sure iframe fills the wrapper
-        const iframe = wrapper.querySelector('iframe');
-        if (iframe) {
-          iframe.style.cssText = 'width:100%;height:100%;border:none;';
+        var wrapper = placeholder.closest('.video-ratio');
+        if (wrapper) {
+          wrapper.style.position = 'relative';
+          wrapper.style.aspectRatio = '16 / 9';
         }
-        
-        placeholder.parentNode.replaceChild(wrapper, placeholder);
+
+        iframe.removeAttribute('width');
+        iframe.removeAttribute('height');
+        iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+
+        placeholder.innerHTML = '';
+        placeholder.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;padding:0;background:#000;border:none;';
+        placeholder.appendChild(iframe);
       });
     })
-    .catch(() => { /* manifest not found or not yet deployed — placeholders stay */ });
+    .catch(function(err) { console.warn('Video manifest load failed:', err); });
 });
 </script>
 

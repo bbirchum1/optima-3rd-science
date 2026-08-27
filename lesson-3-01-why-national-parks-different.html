@@ -2299,101 +2299,75 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function(err) { console.warn('Video manifest load failed:', err); });
 });
 </script>
-<!-- Sticky Fix (iframe fallback for progress bar + tab bar) -->
+<!-- Sticky Fix -->
 <script>
 (function() {
   var pw = document.querySelector('.progress-wrap');
   var tb = document.querySelector('.tab-bar');
   if (!pw) return;
 
-  var pwPlaceholder = document.createElement('div');
-  pwPlaceholder.style.display = 'none';
-  pw.parentNode.insertBefore(pwPlaceholder, pw);
+  // Remove CSS sticky — we handle it entirely in JS
+  pw.style.position = 'relative';
+  if (tb) tb.style.position = 'relative';
 
-  var tbPlaceholder = null;
+  var pwPh = document.createElement('div');
+  pwPh.style.display = 'none';
+  pw.parentNode.insertBefore(pwPh, pw);
+
+  var tbPh = null;
   if (tb) {
-    tbPlaceholder = document.createElement('div');
-    tbPlaceholder.style.display = 'none';
-    tb.parentNode.insertBefore(tbPlaceholder, tb);
+    tbPh = document.createElement('div');
+    tbPh.style.display = 'none';
+    tb.parentNode.insertBefore(tbPh, tb);
   }
 
+  var wrap = document.querySelector('.page-wrap');
+  var maxW = wrap ? wrap.offsetWidth : 920;
+  var pwH = pw.offsetHeight;
   var pwTop = pw.offsetTop;
-  var pwFixed = false;
-  var tbFixed = false;
+  var pwStuck = false, tbStuck = false;
 
-  function applyFixed(el, ph, maxW) {
-    ph.style.display = 'block';
-    ph.style.height = el.offsetHeight + 'px';
-    el.style.position = 'fixed';
-    el.style.left = '0';
-    el.style.right = '0';
-    el.style.width = '100%';
-    el.style.maxWidth = maxW + 'px';
-    el.style.margin = '0 auto';
-  }
+  window.addEventListener('scroll', function() {
+    var sy = window.pageYOffset || document.documentElement.scrollTop;
 
-  function removeFixed(el, ph) {
-    ph.style.display = 'none';
-    el.style.position = '';
-    el.style.left = '';
-    el.style.right = '';
-    el.style.width = '';
-    el.style.maxWidth = '';
-    el.style.margin = '';
-    el.style.top = '';
-  }
-
-  var pageWrap = document.querySelector('.page-wrap');
-  var maxW = pageWrap ? pageWrap.offsetWidth : 920;
-
-  var fallbackNeeded = false;
-
-  function check() {
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    var pwH = pw.offsetHeight;
-
-    if (!pwFixed && scrollY > pwTop) {
-      pwFixed = true;
-      applyFixed(pw, pwPlaceholder, maxW);
-      pw.style.top = '0';
-    } else if (pwFixed && scrollY <= pwTop) {
-      pwFixed = false;
-      removeFixed(pw, pwPlaceholder);
+    // Progress bar
+    var trigPw = pwStuck ? pwPh.offsetTop : pw.offsetTop;
+    if (!pwStuck && sy >= trigPw) {
+      pwStuck = true;
+      pwPh.style.display = 'block';
+      pwPh.style.height = pw.offsetHeight + 'px';
+      pw.style.cssText = 'position:fixed;top:0;left:0;right:0;width:100%;max-width:'+maxW+'px;margin:0 auto;z-index:200;';
+      pwH = pw.offsetHeight;
+    } else if (pwStuck && sy < pwPh.offsetTop) {
+      pwStuck = false;
+      pwPh.style.display = 'none';
+      pw.style.cssText = '';
+      pw.style.position = 'relative';
     }
 
-    if (tb) {
-      var tbOrigTop = tbPlaceholder.style.display === 'block'
-        ? tbPlaceholder.getBoundingClientRect().top + scrollY
-        : tb.getBoundingClientRect().top + scrollY;
-
-      if (!tbFixed && scrollY + pwH > tbOrigTop) {
-        tbFixed = true;
-        applyFixed(tb, tbPlaceholder, maxW);
-        tb.style.top = pwH + 'px';
-      } else if (tbFixed && scrollY + pwH <= tbOrigTop) {
-        tbFixed = false;
-        removeFixed(tb, tbPlaceholder);
+    // Tab bar
+    if (tb && tbPh) {
+      var trigTb = tbStuck ? tbPh.offsetTop : tb.offsetTop;
+      var stickAt = pwStuck ? pwH : 0;
+      if (!tbStuck && sy + stickAt >= trigTb) {
+        tbStuck = true;
+        tbPh.style.display = 'block';
+        tbPh.style.height = tb.offsetHeight + 'px';
+        tb.style.cssText = 'position:fixed;top:'+stickAt+'px;left:0;right:0;width:100%;max-width:'+maxW+'px;margin:0 auto;z-index:100;background:#FAF8F4;border-bottom:3px solid #E8DDD2;display:flex;overflow-x:auto;scrollbar-width:none;';
+      } else if (tbStuck && sy + stickAt < tbPh.offsetTop) {
+        tbStuck = false;
+        tbPh.style.display = 'none';
+        tb.style.cssText = '';
+        tb.style.position = 'relative';
       }
-    }
-  }
-
-  // Detect if sticky is broken (common in iframes)
-  window.addEventListener('scroll', function handler() {
-    if (fallbackNeeded) { check(); return; }
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollY > pwTop + 10) {
-      var rect = pw.getBoundingClientRect();
-      if (rect.top > 2) {
-        // Sticky isn't working — activate fallback
-        fallbackNeeded = true;
-        // Override the CSS sticky so it doesn't interfere
-        pw.style.position = 'relative';
-        if (tb) tb.style.position = 'relative';
-        check();
-      }
-      // If sticky IS working (rect.top near 0), do nothing — remove listener overhead
     }
   }, {passive: true});
+
+  window.addEventListener('resize', function() {
+    maxW = wrap ? wrap.offsetWidth : 920;
+    if (pwStuck) pw.style.maxWidth = maxW + 'px';
+    if (tbStuck && tb) tb.style.maxWidth = maxW + 'px';
+  });
 })();
 </script>
 </body>

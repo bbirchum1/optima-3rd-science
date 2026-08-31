@@ -1,468 +1,266 @@
 {
-  "_readme": "Video Manifest for 3rd Grade Science. One introduction video per lesson. Paste your YouTube embed code into the 'embed' field and set status to 'ready'. The lesson pages auto-load videos from this file via GitHub.",
-  "_manifest_url": "https://raw.githubusercontent.com/bbirchum1/optima-3rd-science/main/video-manifest.json",
-  "videos": {
-    "1-01-intro": {
-      "lesson": "Optima Academy Online – How Do Scientists Observe the World?",
-      "file": "lesson-1-01-how-scientists-observe.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "1-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Becoming a Scientist",
-      "file": "lesson-1-02-become-a-scientist.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "2-01-intro": {
-      "lesson": "Optima Academy Online – What Patterns Do We See in Weather?",
-      "file": "lesson-2-01-weather-patterns.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "2-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Graphing Weekly Weather",
-      "file": "lesson-2-02-graphing-weekly-weather.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "3-01-intro": {
-      "lesson": "Optima Academy Online – Why Are National Parks So Different?",
-      "file": "lesson-3-01-why-national-parks-different.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "3-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Compare Park Climates",
-      "file": "lesson-3-02-compare-park-climates.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "4-01-intro": {
-      "lesson": "Optima Academy Online – How Can Weather Become Dangerous?",
-      "file": "lesson-4-01-dangerous-weather.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "4-02-intro": {
-      "lesson": "Optima Academy Online – Engineering Challenge: Build a Safer Structure",
-      "file": "lesson-4-02-storm-resistant-structure.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "5-01-intro": {
-      "lesson": "Optima Academy Online – How Do Forces Change Motion?",
-      "file": "lesson-5-01-forces-motion.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "5-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Ramp & Ball Motion",
-      "file": "lesson-5-02-ramp-ball-motion.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "6-01-intro": {
-      "lesson": "Optima Academy Online – What Motion Patterns Can We Predict?",
-      "file": "lesson-6-01-motion-patterns.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "6-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Predicting Motion",
-      "file": "lesson-6-02-predicting-motion.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "7-01-intro": {
-      "lesson": "Optima Academy Online – How Do Magnets Work?",
-      "file": "lesson-7-01-how-magnets-work.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "7-02-intro": {
-      "lesson": "Optima Academy Online – Engineering Challenge: Magnetic Rescue Tool",
-      "file": "lesson-7-02-magnetic-rescue-tool.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "8-01-intro": {
-      "lesson": "Optima Academy Online – How Do Plants Grow and Change?",
-      "file": "lesson-8-01-how-plants-grow-and-change.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "8-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Comparing Plant Growth Data",
-      "file": "lesson-8-02-comparing-plant-growth-data.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "9-01-intro": {
-      "lesson": "Optima Academy Online – How Do Animals Grow and Change?",
-      "file": "lesson-9-01-how-do-animals-grow-and-change.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "9-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Compare Animal Life Cycles",
-      "file": "lesson-9-02-compare-animal-life-cycles.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "10-01-intro": {
-      "lesson": "Optima Academy Online – Why Do Offspring Look Like Their Parents?",
-      "file": "lesson-10-01-inherited-traits.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "10-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Family Traits Survey",
-      "file": "lesson-10-02-family-traits-survey.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "11-01-intro": {
-      "lesson": "Optima Academy Online – Why Are Organisms Different?",
-      "file": "lesson-11-01-why-are-organisms-different.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "11-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Survival Traits Challenge",
-      "file": "lesson-11-02-survival-traits-challenge.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "12-01-intro": {
-      "lesson": "Optima Academy Online – What Is a Habitat?",
-      "file": "lesson-12-01-what-is-a-habitat.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "12-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Build a Habitat Model",
-      "file": "lesson-12-02-habitat-model.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "13-01-intro": {
-      "lesson": "Optima Academy Online – What Is an Ecosystem?",
-      "file": "lesson-13-01-what-is-an-ecosystem.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "13-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Ecosystem Balance Simulation",
-      "file": "lesson-13-02-ecosystem-balance.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "14-01-intro": {
-      "lesson": "Optima Academy Online – How Does Energy Move Through Ecosystems?",
-      "file": "lesson-14-01-energy-through-ecosystems.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "14-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Create a Food Web",
-      "file": "lesson-14-02-food-web.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "15-01-intro": {
-      "lesson": "Optima Academy Online – What Limits Survival?",
-      "file": "lesson-15-01-what-limits-survival.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "15-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Survival Scenario Challenge",
-      "file": "lesson-15-02-survival-scenario-challenge.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "16-01-intro": {
-      "lesson": "Optima Academy Online – How Do Traits Help Organisms Survive?",
-      "file": "lesson-16-01-traits-survival.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "16-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Design an Adapted Animal",
-      "file": "lesson-16-02-design-adapted-animal.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "17-01-intro": {
-      "lesson": "Optima Academy Online – What Can Fossils Tell Us?",
-      "file": "lesson-17-01-what-can-fossils-tell-us.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "17-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Fossil Dig Simulation",
-      "file": "lesson-17-02-fossil-dig-simulation.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "18-01-intro": {
-      "lesson": "Optima Academy Online – How Do Plants Survive in Different Environments?",
-      "file": "lesson-18-01-plant-survival-strategies.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "18-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Compare Plant Adaptations",
-      "file": "lesson-18-02-compare-plant-adaptations.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "19-01-intro": {
-      "lesson": "Optima Academy Online – How Do Plants Make Food?",
-      "file": "lesson-19-01-how-do-plants-make-food.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "19-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Light & Plant Growth",
-      "file": "lesson-19-02-light-plant-growth.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "20-01-intro": {
-      "lesson": "Optima Academy Online – How Do Plants Respond to Their Environment?",
-      "file": "lesson-20-01-plant-responses.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "20-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Phototropism Experiment",
-      "file": "lesson-20-02-phototropism.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "21-01-intro": {
-      "lesson": "Optima Academy Online – How Do Plants Reproduce?",
-      "file": "lesson-21-01-how-plants-reproduce.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "21-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Seed vs. Spore Sorting",
-      "file": "lesson-21-02-seed-vs-spore-sorting.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "22-01-intro": {
-      "lesson": "Optima Academy Online – How Do Humans Affect Ecosystems?",
-      "file": "lesson-22-01-how-do-humans-affect-ecosystems.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "22-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Human Impact Case Study",
-      "file": "lesson-22-02-human-impact-case-study.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "23-01-intro": {
-      "lesson": "Optima Academy Online – What Types of Pollution Harm Ecosystems?",
-      "file": "lesson-23-01-pollution-ecosystems.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "23-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Pollution Cleanup Simulation",
-      "file": "lesson-23-02-pollution-cleanup.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "24-01-intro": {
-      "lesson": "Optima Academy Online – What Is Conservation?",
-      "file": "lesson-24-01-what-is-conservation.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "24-02-intro": {
-      "lesson": "Optima Academy Online – How Can We Practice Conservation?",
-      "file": "lesson-24-02-how-can-we-practice-conservation.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "25-01-intro": {
-      "lesson": "Optima Academy Online – Why Do We Protect National Parks?",
-      "file": "lesson-25-01-why-do-we-protect-national-parks.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "25-02-intro": {
-      "lesson": "Optima Academy Online – Protect a Park Proposal",
-      "file": "lesson-25-02-protect-a-park-proposal.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "26-01-intro": {
-      "lesson": "Optima Academy Online – What Are the Properties of Matter?",
-      "file": "lesson-26-01-properties-of-matter.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "26-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Measuring and Comparing Matter",
-      "file": "lesson-26-02-measuring-matter.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "27-01-intro": {
-      "lesson": "Optima Academy Online – How Does Matter Change When Heated or Cooled?",
-      "file": "lesson-27-01-matter-changes.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "27-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Heating, Cooling, and Water Changes",
-      "file": "lesson-27-02-heating-cooling-water.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "28-01-intro": {
-      "lesson": "Optima Academy Online – How Does Energy Cause Change?",
-      "file": "lesson-28-01-energy-causes-change.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "28-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Light, Reflection, and Heat",
-      "file": "lesson-28-02-light-reflection-heat.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "29-01-intro": {
-      "lesson": "Optima Academy Online – What Makes the Everglades Special?",
-      "file": "lesson-29-01-what-makes-the-everglades-special.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "29-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Everglades Food Web",
-      "file": "lesson-29-02-everglades-food-web.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "30-01-intro": {
-      "lesson": "Optima Academy Online – How Are Florida Animals Adapted?",
-      "file": "lesson-30-01-florida-animal-adaptations.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "30-02-intro": {
-      "lesson": "Optima Academy Online – Investigation: Adaptation Comparison",
-      "file": "lesson-30-02-adaptation-comparison.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "31-01-intro": {
-      "lesson": "Optima Academy Online – What Threatens Florida Ecosystems?",
-      "file": "lesson-31-01-florida-ecosystem-threats.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "31-02-intro": {
-      "lesson": "Optima Academy Online – Engineering Challenge: Protect Florida Habitats",
-      "file": "lesson-31-02-protect-florida-habitats.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "32-01-intro": {
-      "lesson": "Optima Academy Online – Researching a National Park Ecosystem",
-      "file": "lesson-32-01-national-park-ecosystem.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "32-02-intro": {
-      "lesson": "Optima Academy Online – Build a Park Ecosystem Presentation",
-      "file": "lesson-32-02-build-park-ecosystem-presentation.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "33-01-intro": {
-      "lesson": "Optima Academy Online – How Is Everything Connected?",
-      "file": "lesson-33-01-how-is-everything-connected.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    },
-    "33-02-intro": {
-      "lesson": "Optima Academy Online – Your Final Science Investigation",
-      "file": "lesson-33-02-final-investigation.html",
-      "type": "Introduction",
-      "embed": "",
-      "status": "pending"
-    }
+  "1-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "1-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "10-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "10-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "11-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "11-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "12-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "12-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "13-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "13-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "14-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "14-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "15-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "15-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "16-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "16-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "17-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "17-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "18-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "18-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "19-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "19-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "2-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "2-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "20-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "20-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "21-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "21-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "22-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "22-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "23-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "23-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "24-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "24-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "25-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "25-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "26-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "26-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "27-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "27-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "28-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "28-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "29-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "29-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "3-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "3-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "30-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "30-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "31-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "31-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "32-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "32-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "33-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "33-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "4-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "4-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "5-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "5-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "6-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "6-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "7-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "7-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "8-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "8-02-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "9-01-intro": {
+    "status": "pending",
+    "embed": ""
+  },
+  "9-02-intro": {
+    "status": "pending",
+    "embed": ""
   }
 }
